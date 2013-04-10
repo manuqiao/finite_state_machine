@@ -48,3 +48,31 @@ void FSMstate::AddTransition(int iInput,int iOutputID)
 		m_piInputs[i]=iInput;
 	}
 }
+
+void FSMstate::DeleteTransition(int iOutputID)
+{
+	// 遍历每一个输出状态
+	for(int i=0;i<m_usNumberOfTransition;++i)
+	{
+		//如果找到输出状态，退出循环
+		if(m_piOutputState[i]==iOutputID)
+			break;
+	}
+	//如果没有找到输出状态，返回
+	if(i>=m_usNumberOfTransition)
+		return;
+	//将输出状态的内容置0
+	m_piInputs[i]=0;
+	m_piOutputState[i]=0;
+	//被删除的输出状态的后面的输出状态前移
+	for(;i<(m_usNumberOfTransition-1);++i)
+	{
+		if(!m_piOutputState[i])
+			break;
+		m_piInputs[i]=m_piInputs[i+1];
+		m_piOutputState[i]=m_piOutputState[i+1];
+	}
+	//最后面的输出状态置0
+	m_piInputs[i]=0;
+	m_piOutputState[i]=0;
+}
