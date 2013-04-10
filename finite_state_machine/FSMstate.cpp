@@ -32,7 +32,7 @@ FSMstate::FSMstate(int iStateID,unsigned usTransitions)
 	}
 }
 
-FSMState::~FSMState()
+FSMstate::~FSMstate()
 {
 	delete [] m_piInputs;
 	delete [] m_piOutputState;
@@ -40,7 +40,7 @@ FSMState::~FSMState()
 
 void FSMstate::AddTransition(int iInput,int iOutputID)
 {
-	for(int i=0;i<m_usNumberOfTransitions;++i)
+	for(int i=0;i<m_usNumberOfTransition;++i)
 		if(!m_piOutputState[i]) break;
 	if(i<m_usNumberOfTransition)
 	{
